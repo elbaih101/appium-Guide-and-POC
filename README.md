@@ -46,7 +46,7 @@
 8. **Run the AVD**
    - Start the AVD using:
      ```
-     emulator -avd AVD1
+     emulator -avd AVD1 -memory 4096 -skin 1080x1920
      ```
    - Check if the device is detected:
      ```
