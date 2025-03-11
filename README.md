@@ -26,52 +26,57 @@
 
 5. **Install Android Platforms and Tools**
    - Install the platforms, build tools, and system image for the desired Android version (e.g., Android 15):
-     ```
+     ```sh
      sdkmanager --install "system-images;android-35;google_apis_playstore;x86_64" "sources;android-35" "platforms;android-35" "build-tools;35.0.1"
      ```
 
 6. **Create the AVD**
    - Create the Android Virtual Device (AVD) via the CLI command:
-     ```
+     ```sh
      avdmanager create avd --name "AVD1" --package "system-images;android-35;google_apis_playstore;x86_64"
      ```
 
 7. **Check the AVD**
    - Verify that the AVD has been created using the following commands:
-     ```
+     ```sh
      avdmanager list avd
      emulator -list-avds
      ```
 
 8. **Run the AVD**
    - Start the AVD using:
-     ```
+     ```sh
      emulator -avd AVD1 -memory 4096 -skin 1080x1920
      ```
    - Check if the device is detected:
-     ```
+     ```sh
      adb devices
      ```
 
 9. **Install Appium**
    - Install Appium via npm:
-     ```
+     ```sh
      npm install -g appium
      ```
 
 10. **Set NPM Environment Variable**
+    - check the root location of your npm global packages
+      ```sh
+         npm root -g
+      ```
     - Set the environment variable for npm modules:
       ```
       C:\Users\<YourUsername>\AppData\Roaming\npm
       ```
 
-11. **Install Appium UIAutomator2 Driver**
+12. **Install Appium UIAutomator2 Driver**
+
     - Install the Appium UIAutomator2 driver globally via npm:
-      ```
+      ```sh
       npm install -g appium-uiautomator2-driver
       ```
     - Install the driver using Appium:
-      ```
+      ```sh
       appium driver install uiautomator2
       ```
 
