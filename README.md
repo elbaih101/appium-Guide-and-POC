@@ -2,18 +2,20 @@
 
 ## Initiating the Base Setup
 
-1. **Download the Android SDK**
+1. **Download the Android Command-line tools**
+   [command line tools](https://developer.android.com/studio)
    - Ensure you have the Android SDK downloaded.
 
-2. **Download the Platform Tools**
+3. **Download the Platform-Tools**
+   [Platform-tools](https://developer.android.com/tools/releases/platform-tools)
    - Download the necessary platform tools.
 
-3. **Extract the Files**
+5. **Extract the Files**
    - Extract the files to the location `D:\tools\android`.
    - Create the directory `D:\tools\android\cmdline-tools\latest`.
    - Copy all the contents from `D:\tools\android\cmdline-tools` to `D:\tools\android\cmdline-tools\latest` except the `latest` folder.
 
-4. **Set Environment Variables**
+6. **Set Environment Variables**
    - Set the user variable `ANDROID_HOME` to `D:\tools\android`.
    - Add the following paths to the system `PATH` variable:
      ```
@@ -24,26 +26,26 @@
      %ANDROID_HOME%\platforms
      ```
 
-5. **Install Android Platforms and Tools**
+7. **Install Android Platforms and Tools**
    - Install the platforms, build tools, and system image for the desired Android version (e.g., Android 15):
      ```sh
      sdkmanager --install "system-images;android-35;google_apis_playstore;x86_64" "sources;android-35" "platforms;android-35" "build-tools;35.0.1"
      ```
 
-6. **Create the AVD**
+8. **Create the AVD**
    - Create the Android Virtual Device (AVD) via the CLI command:
      ```sh
      avdmanager create avd --name "AVD1" --package "system-images;android-35;google_apis_playstore;x86_64"
      ```
 
-7. **Check the AVD**
+9. **Check the AVD**
    - Verify that the AVD has been created using the following commands:
      ```sh
      avdmanager list avd
      emulator -list-avds
      ```
 
-8. **Run the AVD**
+10. **Run the AVD**
    - Start the AVD using:
      ```sh
      emulator -avd AVD1 -memory 4096 -skin 1080x1920
@@ -53,13 +55,13 @@
      adb devices
      ```
 
-9. **Install Appium**
+11. **Install Appium**
    - Install Appium via npm:
      ```sh
      npm install -g appium
      ```
 
-10. **Set NPM Environment Variable**
+11. **Set NPM Environment Variable**
     - check the root location of your npm global packages
       ```sh
          npm root -g
