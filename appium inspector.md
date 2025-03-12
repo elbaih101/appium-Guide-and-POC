@@ -5,10 +5,10 @@ Before running any tests, you need to launch the Android emulator.
 
 ```bash
 # List available devices
-$ emulator -list-avds
+emulator -list-avds
 
 # Launch the emulator (replace "Pixel_3_API_30" with your AVD name)
-$ emulator -avd AVD1 -memory 4096 -skin 480x720
+emulator -avd AVD1 -memory 4096 -skin 480x720
 ```
 
 You should see the emulator boot up on your machine.
@@ -18,7 +18,7 @@ Next, you need to start the Appium server. Use the following command to run the 
 
 ```bash
 # Start Appium server with CORS enabled
-$ appium --allow-cors
+appium --allow-cors
 ```
 
 This will start the Appium server, and you should see logs in the terminal showing that it’s running.
@@ -28,7 +28,7 @@ Ensure that ADB is connected to the running emulator by executing the following:
 
 ```bash
 # List connected devices
-$ adb devices
+adb devices
 ```
 
 This should display the emulator device, e.g., `emulator-5554`, confirming that ADB has detected your emulator.
@@ -38,7 +38,7 @@ To verify the Android version running on the emulator, use this command:
 
 ```bash
 # Check the Android version
-$ adb shell getprop ro.build.version.release
+adb shell getprop ro.build.version.release
 ```
 
 It will return the Android version, such as `11`, `12`, etc.
