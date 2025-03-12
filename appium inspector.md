@@ -8,7 +8,7 @@ Before running any tests, you need to launch the Android emulator.
 $ emulator -list-avds
 
 # Launch the emulator (replace "Pixel_3_API_30" with your AVD name)
-$ emulator -avd Pixel_3_API_30
+$ emulator -avd AVD1 -memory 4096 -skin 480x720
 ```
 
 You should see the emulator boot up on your machine.
