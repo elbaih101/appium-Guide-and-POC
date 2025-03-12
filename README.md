@@ -86,4 +86,4 @@ By following these steps, you will set up your environment for Appium and Androi
 
 Note: Replace `<YourUsername>` with your actual Windows username in step 10.
 
-[Follow up with appium inspector]("appium-inspector.md")
+[Follow up with appium inspector](appium-inspector.md)
