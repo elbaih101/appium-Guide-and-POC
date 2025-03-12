@@ -40,6 +40,11 @@ To verify the Android version running on the emulator, use this command:
 # Check the Android version
 adb shell getprop ro.build.version.release
 ```
+if you have multibe devices use the device id
+```bash
+# Check the Android version
+adb -s emulator-5554 shell getprop ro.build.version.release
+```   
 
 It will return the Android version, such as `11`, `12`, etc.
 
