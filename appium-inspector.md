@@ -11,6 +11,12 @@ emulator -list-avds
 emulator -avd AVD1 -memory 4096 -skin 480x720
 ```
 
+to launch the emulator discarding the latest activity
+```bash
+emulator -avd AVD1 -no-snapshot-load -memory 4096 -skin 480x720
+
+```
+
 You should see the emulator boot up on your machine.
 
 ### 2. Start the Appium Server
@@ -59,11 +65,20 @@ It will return the Android version, such as `11`, `12`, etc.
 
 ```json
 {
-  "platformName": "Android",
+  "platformName": "Android",     //name of os
   "appium:platformVersion": "15",  // Update this with your emulator version
-  "appium:automationName": "uiautomator2",
-  "appium:deviceName": "emulator-5554"
+  "appium:automationName": "uiautomator2",   //name of the automation driver
+  "appium:deviceName": "emulator-5554",     //name of the device from adb devices
+   "appium:app": "$PATH to the application"   // path to application or package name
 }
+```
+for the `app` capability if the apk is not present on the machiene you could get the oppened app package and activity instead 
+```sh
+adb shell dumpsys window windows | grep -E 'mCurrentFocus'
+```
+or list all the packages and select the desired one
+```sh
+adb shell pm list packages
 ```
 
 3. **Start the Session**  
