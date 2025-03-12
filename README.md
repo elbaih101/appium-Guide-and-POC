@@ -3,11 +3,11 @@
 ## Initiating the Base Setup
 
 1. **Download the Android Command-line tools**
-   [command line tools]([https://developer.android.com/studio](https://developer.android.com/studio#command-line-tools-only))
+   [command line tools](https://developer.android.com/studio#command-line-tools-only)
    - Ensure you have the Android SDK downloaded.
 
 3. **Download the Platform-Tools**
-   [Platform-tools](https://developer.android.com/tools/releases/platform-tools)
+   [Platform-tools](https://developer.android.com/tools/releases/platform-tools#downloads)
    - Download the necessary platform tools.
 
 5. **Extract the Files**
