@@ -54,20 +54,24 @@ import java.io.IOException;
 public class LaunchEmulator {
     public static void main(String[] args) {
         try {
-            // Define the emulator command to run in detached mode
-            String command = "emulator -avd Pixel_4_API_30 -no-window";
+            // Define the emulator command as an array of strings
+            String[] command = {
+                "emulator",               // The emulator executable
+                "-avd", "Pixel_4_API_30", // The AVD name
+                "-no-window"              // Run in detached mode (no UI)
+            };
 
             // Set up ProcessBuilder to run the command and redirect output to /dev/null or NUL
             ProcessBuilder processBuilder;
             String os = System.getProperty("os.name").toLowerCase();
             if (os.contains("win")) {
-                // For Windows
-                processBuilder = new ProcessBuilder(command.split(" "));
+                // For Windows: redirecting output to NUL (equivalent of /dev/null)
+                processBuilder = new ProcessBuilder(command);
                 processBuilder.redirectOutput(ProcessBuilder.Redirect.to(new java.io.File("NUL")));
                 processBuilder.redirectError(ProcessBuilder.Redirect.to(new java.io.File("NUL")));
             } else {
-                // For Linux or macOS
-                processBuilder = new ProcessBuilder(command.split(" "));
+                // For Linux or macOS: redirecting output to /dev/null
+                processBuilder = new ProcessBuilder(command);
                 processBuilder.redirectOutput(ProcessBuilder.Redirect.to(new java.io.File("/dev/null")));
                 processBuilder.redirectError(ProcessBuilder.Redirect.to(new java.io.File("/dev/null")));
             }
@@ -82,6 +86,7 @@ public class LaunchEmulator {
         }
     }
 }
+
 ```
 
 ### Key Points:
