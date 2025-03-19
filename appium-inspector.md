@@ -69,7 +69,7 @@ It will return the Android version, such as `11`, `12`, etc.
   "appium:platformVersion": "15",  // Update this with your emulator version
   "appium:automationName": "uiautomator2",   //name of the automation driver
   "appium:deviceName": "emulator-5554",     //name of the device from adb devices
-   "appium:app": "$PATH to the application"   // path to application or package name
+   "appium:app": "$PATH to the application"   // path to application or package name this is optional for debugging may not include it
 }
 ```
 for the `app` capability if the apk is not present on the machiene you could get the oppened app package and activity instead 
