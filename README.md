@@ -81,7 +81,8 @@
      
 
 12. **Install Appium UIAutomator2 Driver**
-    This can be acchieved by two method Either one of them will be enaugh
+    
+       This can be acchieved by two method Either one of them will be enaugh
 
     - Install the Appium UIAutomator2 driver globally via npm:
       ```sh
