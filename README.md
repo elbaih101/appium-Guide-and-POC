@@ -72,10 +72,13 @@
       ```sh
          npm root -g
       ```
-    - Set the environment variable for npm modules:
-      ```
+      the output should be similar to this
+       ```
       C:\Users\<YourUsername>\AppData\Roaming\npm
       ```
+    - add The Outcome Path to the PATH environment variable:
+      This will ensure any npm module is runnable from any Terminal session
+     
 
 12. **Install Appium UIAutomator2 Driver**
 
