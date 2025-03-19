@@ -59,7 +59,7 @@
       PANIC: Cannot find AVD system path. Please define ANDROID_SDK_ROOT
       PANIC: Broken AVD system path. Check your ANDROID_SDK_ROOT value
    ```
-  - make sure all the files are downloaded (system-images ,platforms,build-tppls) in the android path
+  - make sure all the files are downloaded (system-images ,platforms,build-tools) in the android path
   - make sure the platform-tools downloaded in the same path 
 11. **Install Appium**
    - Install Appium via npm:
