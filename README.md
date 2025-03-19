@@ -1,5 +1,25 @@
 # Appium Guide and POC
 
+## Before initiating the setup with the virtual machine you should check the virtualization enabled in your device
+some commands that may be helpfull
+
+This Command will get all sysetm info  
+```sh
+ systeminfo.exe
+```
+looking for the ``Hyper-V Requirements:`` if its similar to this 
+![image](https://github.com/user-attachments/assets/43172cf6-d60c-4bba-957d-c5e950b67050)
+or this
+![image](https://github.com/user-attachments/assets/a0109412-df84-43a7-bbb1-69b0f9a310df)
+Then Virtualization is enabled
+
+if not Please Enable it From Bios (Contact the IT Person if you have no clue)
+
+Similar to the above command
+```sh
+Get-ComputerInfo -property "HyperV*"
+```
+
 ## Initiating the Base Setup
 
 1. **Download the Android Command-line tools**
