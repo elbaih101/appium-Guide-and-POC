@@ -58,8 +58,9 @@ It will return the Android version, such as `11`, `12`, etc.
 
 1. **Launch Appium Desktop**  
    Open the Appium Desktop application to start configuring the Appium Inspector.
+   Or You can use the Web Based Version [appium inspector web](https://inspector.appiumpro.com/)
 
-2. **Create a New Session**  
+3. **Create a New Session**  
    - In Appium Desktop, click on **Start New Session**.
    - Enter the desired capabilities for your session. Here's an example configuration for an Android emulator:
 
