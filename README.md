@@ -94,11 +94,14 @@ Get-ComputerInfo -property "HyperV*"
       ```
       the output should be similar to this
        ```
+      C:\Users\<YourUsername>\AppData\Roaming\npm\node-modules
+      ```
+    - add The Outcome removing the``\node-modules`` Path to the PATH environment variable:
+      This will ensure any npm module is runnable from any Terminal session
+       ```
       C:\Users\<YourUsername>\AppData\Roaming\npm
       ```
-    - add The Outcome Path to the PATH environment variable:
-      This will ensure any npm module is runnable from any Terminal session
-     
+     Note: Replace `<YourUsername>` with your actual Windows username in step 10.
 
 12. **Install Appium UIAutomator2 Driver**
     
@@ -115,7 +118,7 @@ Get-ComputerInfo -property "HyperV*"
 
 By following these steps, you will set up your environment for Appium and Android development.
 
-Note: Replace `<YourUsername>` with your actual Windows username in step 10.
+
 
 [Follow up with appium inspector](appium-inspector.md)
 
