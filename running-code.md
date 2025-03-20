@@ -9,5 +9,5 @@ the intellij virtyal machiene may not have access to the appium drivers installe
 4. if so please reinstall the drivers from within the intellij console
   For Example
    ```sh
-  appium driver install uiautomator2
+    appium driver install uiautomator2
    ```
