@@ -82,7 +82,13 @@ or list all the packages and select the desired one
 adb shell pm list packages
 ```
 
+
+
+
 3. **Start the Session**  
    Once the configuration is set, click **Start Session** in Appium Inspector. It will connect to the emulator, and you should see the UI of the emulator inside the Appium Inspector, ready for interaction.
+
+[Follow up with running the code](running-code.md)
+
    
 ![image](https://github.com/user-attachments/assets/eb191378-e48f-4273-b1c1-a2e7b83d05ba)
