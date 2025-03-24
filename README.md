@@ -52,22 +52,26 @@ Get-ComputerInfo -property "HyperV*"
      sdkmanager --install "system-images;android-35;google_apis_playstore;x86_64" "sources;android-35" "platforms;android-35" "build-tools;35.0.1"
      ```
      if Faced with an error related to the java version not compatible
-     - Please Check the ``JAVA_HOME`` Environment Variable and Set it to the java version 17 or above 
+     - Please Check the ``JAVA_HOME`` Environment Variable and Set it to the java version 17 or above
+    
+    if faced with failed to locate or connection issue
+     - this may be due to a proxy related setting or the connection is bad
+     - add this url to the proxy exclusion list ``dl.google.com`` 
 
-8. **Create the AVD**
+9. **Create the AVD**
    - Create the Android Virtual Device (AVD) via the CLI command:
      ```sh
      avdmanager create avd --name "AVD1" --package "system-images;android-35;google_apis_playstore;x86_64"
      ```
 
-9. **Check the AVD**
+10. **Check the AVD**
    - Verify that the AVD has been created using the following commands:
      ```sh
      avdmanager list avd
      emulator -list-avds
      ```
 
-10. **Run the AVD**
+11. **Run the AVD**
    - Start the AVD using:
      ```sh
      emulator -avd AVD1 -memory 4096 -skin 1080x1920
