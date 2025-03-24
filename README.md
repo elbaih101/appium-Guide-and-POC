@@ -51,6 +51,8 @@ Get-ComputerInfo -property "HyperV*"
      ```sh
      sdkmanager --install "system-images;android-35;google_apis_playstore;x86_64" "sources;android-35" "platforms;android-35" "build-tools;35.0.1"
      ```
+     if Faced with an error related to the java version not compatible
+     - Please Check the ``JAVA_HOME`` Environment Variable and Set it to the java version 17 or above 
 
 8. **Create the AVD**
    - Create the Android Virtual Device (AVD) via the CLI command:
