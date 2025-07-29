@@ -17,6 +17,7 @@ emulator -avd AVD1 -no-snapshot-load -memory 4096 -skin 480x720
 
 ```
 
+
 You should see the emulator boot up on your machine.
 
 ### 2. Start the Appium Server
@@ -76,6 +77,9 @@ It will return the Android version, such as `11`, `12`, etc.
 for the `app` capability if the apk is not present on the machiene you could get the oppened app package and activity instead 
 ```sh
 adb shell dumpsys window windows | grep -E 'mCurrentFocus'
+```
+```commandline
+ adb shell dumpsys activity activities | findstr "mCurrentFocus"
 ```
 or list all the packages and select the desired one
 ```sh
