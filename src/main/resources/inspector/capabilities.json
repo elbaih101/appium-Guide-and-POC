@@ -1,0 +1,7 @@
+{
+  "platformName": "Android",     //name of os
+  "appium:platformVersion": "15",  // Update this with your emulator version
+  "appium:automationName": "uiautomator2",   //name of the automation driver
+  "appium:deviceName": "emulator-5554",     //name of the device from adb devices
+  "appium:app": "D:\\Projects\\appium-Guide-and-POC\\src\\main\\resources\\apps\\ApiDemos-debug.apk"   // path to application or package name
+}
