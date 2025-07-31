@@ -38,8 +38,10 @@ public class DriverManager {
                     .setAutomationName("uiautomator2")
 
                     .setUdid("emulator-5554")
+                    .setAppPackage("com.google.android.deskclock")
+                    .setAppActivity("com.android.deskclock.DeskClock");
 
-                    .setApp("D:\\Projects\\appium-Guide-and-POC\\src\\main\\resources\\apps\\ApiDemos-debug.apk");
+                   // .setApp("D:\\Projects\\appium-Guide-and-POC\\src\\main\\resources\\apps\\ApiDemos-debug.apk");
 
 
 
