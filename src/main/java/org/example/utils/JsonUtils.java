@@ -1,11 +1,17 @@
 package org.example.utils;
 
-import io.cucumber.core.internal.com.fasterxml.jackson.core.JsonProcessingException;
-import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
-import io.cucumber.core.internal.com.fasterxml.jackson.databind.SerializationFeature;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.openqa.selenium.json.Json;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -50,9 +56,10 @@ public class JsonUtils {
         }
     }
 
-    public Json readJson(String filePath) {
+    public static JsonElement readJson(String filePath) {
         try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+           FileReader reader = new FileReader((filePath));
+                return  JsonParser.parseReader(reader);
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
