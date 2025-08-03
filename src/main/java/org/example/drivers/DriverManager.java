@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.example.utils.JsonUtils;
+import org.example.utils.PropertiesManager;
 
 
 import java.io.File;
@@ -32,7 +33,8 @@ public class DriverManager {
     public static void initDriver() throws MalformedURLException {
 
         if (driver == null) {
-            File capbilities = new File("src/main/resources/inspector/capabilities.json");
+            PropertiesManager probs =PropertiesManager.fromFile("src/main/resources/capability.properties");
+            File capbilities = new File(probs.getOrDefault("capabilities",""));
             JsonObject caps = JsonUtils.readJson(capbilities.getPath()).getAsJsonObject();
             UiAutomator2Options options = new UiAutomator2Options()
 
