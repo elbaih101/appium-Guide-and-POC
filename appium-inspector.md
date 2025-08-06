@@ -78,7 +78,7 @@ for the `app` capability if the apk is not present on the machiene you could get
 ```sh
 adb shell dumpsys activity activities| grep -E 'mCurrentFocus'
 ```
-```commandline
+```sh
  adb shell dumpsys activity activities | findstr "mCurrentFocus"
 ```
 or list all the packages and select the desired one
