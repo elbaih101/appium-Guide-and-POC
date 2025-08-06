@@ -13,7 +13,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import java.net.URL;
-import java.nio.file.Path;
+
+import java.time.Duration;
 import java.util.Optional;
 
 
@@ -54,7 +55,11 @@ public class DriverManager {
                                     .map(path -> new File(path).getAbsolutePath())
                                     .orElse(null))
                     .setAppPackage(caps.has("appium:appPackage") ? caps.get("appium:appPackage").getAsString() : null)
-                    .setAppActivity(caps.has("appium:appActivity") ? caps.get("appium:appActivity").getAsString() : null);
+                    .setAppActivity(caps.has("appium:appActivity") ? caps.get("appium:appActivity").getAsString() : null)
+                    .setAppWaitActivity(caps.has("appWaitActivity") ? caps.get("appWaitActivity").getAsString() : null)
+                    .setAppWaitDuration(caps.has("appWaitDuration") ? Duration.ofMillis(caps.get("appWaitDuration").getAsLong()) : null)
+                    .setAdbExecTimeout(caps.has("adbExecTimeout") ?  Duration.ofMillis(caps.get("adbExecTimeout").getAsLong()) : null)
+                    .setNoReset(caps.has("noReset") && caps.get("noReset").getAsBoolean());
 
 
             URL url = new URL("http://0.0.0.0:4723");

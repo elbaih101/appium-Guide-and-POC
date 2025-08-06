@@ -1,7 +1,13 @@
 {
-  "platformName": "Android",     //name of os
-  "appium:platformVersion": "15",  // Update this with your emulator version
-  "appium:automationName": "uiautomator2",   //name of the automation driver
-  "appium:deviceName": "emulator-5554",     //name of the device from adb devices
-  "appium:app": "src/main/resources/apps/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk"   // path to application or package name
+  "platformName": "Android",
+  "appium:platformVersion": "15",
+  "appium:automationName": "uiautomator2",
+  "appium:deviceName": "emulator-5554",
+  "appium:app": "src/main/resources/apps/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk",
+  "appium:appPackage": "com.swaglabsmobileapp",
+  "appium:appActivity": "com.swaglabsmobileapp.SplashActivity",
+  "appWaitActivity": "*",
+  "appWaitDuration": 60000,
+  "adbExecTimeout": 60000,
+  "noReset": true
 }
