@@ -4,21 +4,18 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumFluentWait;
 import io.appium.java_client.android.AndroidDriver;
 import org.example.drivers.DriverManager;
+import org.example.utils.listeners.TestNgListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.time.Clock;
 import java.time.Duration;
 
+@Listeners(TestNgListener.class)
 public class TestScricpts {
 
     public static final By ClickOnAccessibiltyBtn = AppiumBy.accessibilityId("Access'ibility");
@@ -46,35 +43,38 @@ public class TestScricpts {
         driver = DriverManager.getDriver();
     }
 
-    @Test
-    public void ClickAccBtn() {
-        WebElement Button = driver.findElement(ClickOnAccessibiltyBtn);
-        Button.click();
-    }
-
-    @Test
-    public void navigateToStopWatchScreen() {
-        driver.findElement(stopWatchButton).click();
-        Assert.assertEquals(driver.findElement(pageTitle).getText(), "Stopwatch");
-    }
-
+    //
+//    @Test
+//    public void ClickAccBtn() {
+//        WebElement Button = driver.findElement(ClickOnAccessibiltyBtn);
+//        Button.click();
+//    }
+//
+//    @Test
+//    public void navigateToStopWatchScreen() {
+//        driver.findElement(stopWatchButton).click();
+//        Assert.assertEquals(driver.findElement(pageTitle).getText(), "Stopwatch");
+//    }
+//@Listeners(TestNgListener.class)
     @Test(dataProvider = "loginData")
     public void loginToSwagLab(String user, String password, String message) {
 
         AppiumFluentWait<AndroidDriver> wait = new AppiumFluentWait<>(driver, Clock.systemUTC(), Sleeper.SYSTEM_SLEEPER);
         wait.withTimeout(Duration.ofSeconds(5));
         wait.until(d -> d.currentActivity().equals(".MainActivity"));
-        wait.ignoring(NoSuchElementException.class).until(d->d.findElement(swagLabUserNameField).isDisplayed());
+        wait.ignoring(NoSuchElementException.class).until(d -> d.findElement(swagLabUserNameField).isDisplayed());
         driver.findElement(swagLabUserNameField).sendKeys(user);
         driver.findElement(swagLabPasswordField).sendKeys(password);
         driver.findElement(swagLabLoginButton).click();
         if (message.equals("success")) {
-            wait.ignoring(NoSuchElementException.class).until(d->d.findElement(swagLabProductPageTitle).isDisplayed());
+            wait.ignoring(NoSuchElementException.class).until(d -> d.findElement(swagLabProductPageTitle).isDisplayed());
 
             Assert.assertEquals(driver.findElement(swagLabProductPageTitle).getText(), "PRODUCTS");
         } else
             Assert.assertEquals(driver.findElement(swagLabLoginErrorMessage).getText(), message);
     }
+
+    @Test()
 
     @AfterClass
     public void tearDown() {
