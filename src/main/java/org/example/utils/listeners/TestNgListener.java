@@ -7,6 +7,7 @@ import org.example.utils.allure.AllureUtils;
 import org.example.utils.bots.ScreenShotsActions;
 import org.example.utils.preconds.AVDLauncher;
 import org.example.utils.preconds.AppiumLauncher;
+import org.example.utils.preconds.AppiumServer;
 import org.testng.*;
 
 import java.io.ByteArrayInputStream;
@@ -40,8 +41,9 @@ public class TestNgListener implements
 
         if (appiumRunning.compareAndSet(false, true)) {
             LogUtils.logInfo("Starting Appium server...");
-            AppiumLauncher.startAppium();
-            AppiumLauncher.waitForAppium();
+            AppiumServer.startServer();
+//            AppiumLauncher.startAppium();
+//            AppiumLauncher.waitForAppium();
         } else {
             LogUtils.logDebug("Appium already running, skipping start.");
         }
@@ -53,7 +55,8 @@ public class TestNgListener implements
 
         if (appiumRunning.compareAndSet(true, false)) {
             LogUtils.logInfo("Stopping Appium server...");
-            AppiumLauncher.stopAppium();
+            AppiumServer.stopServer();
+//            AppiumLauncher.stopAppium();
         } else {
             LogUtils.logDebug("Appium was not running, skipping stop.");
         }
@@ -97,10 +100,8 @@ public class TestNgListener implements
         try {
             byte[] screenshot = new ScreenShotsActions(DriverManager.getDriver()).takeScreenShotByte();
             synchronized (Allure.class) { // Ensure thread-safe Allure attachment
-                Allure.addAttachment("Failure Screenshot - " + result.getMethod().getMethodName(),
-                        "image/png",
-                        new ByteArrayInputStream(screenshot),
-                        "png");
+                AllureUtils.attachImage("Failure Screenshot - " + result.getMethod().getMethodName(),
+                        screenshot);
             }
         } catch (Exception e) {
             LogUtils.logError("Failed to capture screenshot: ", e.getMessage());

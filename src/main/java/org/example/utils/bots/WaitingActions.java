@@ -5,19 +5,21 @@ import io.appium.java_client.AppiumFluentWait;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Sleeper;
 
 import java.time.Clock;
 import java.time.Duration;
-import java.util.function.Function;
+
 
 public class WaitingActions {
-    AppiumDriver driver;
-    AppiumFluentWait<AppiumDriver> wait ;
+    RemoteWebDriver driver;
+    FluentWait<RemoteWebDriver> wait ;
 
-    public WaitingActions(AppiumDriver driver) {
+    public WaitingActions(RemoteWebDriver driver) {
         this.driver=driver;
-        wait = new AppiumFluentWait<>(driver, Clock.systemUTC(), Sleeper.SYSTEM_SLEEPER);
+        wait = new FluentWait<>(driver, Clock.systemUTC(), Sleeper.SYSTEM_SLEEPER);
         wait.withTimeout(Duration.ofSeconds(10));
     }
     public  void waitForActivityToBe(String activity){

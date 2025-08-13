@@ -4,6 +4,8 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumFluentWait;
 import io.appium.java_client.android.AndroidDriver;
 import org.example.drivers.DriverManager;
+import org.example.screens.LoginScreen;
+import org.example.screens.ProductsScreen;
 import org.example.utils.listeners.TestNgListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -56,25 +58,33 @@ public class TestScricpts {
 //        Assert.assertEquals(driver.findElement(pageTitle).getText(), "Stopwatch");
 //    }
 //@Listeners(TestNgListener.class)
-    @Test(dataProvider = "loginData")
-    public void loginToSwagLab(String user, String password, String message) {
-
-        AppiumFluentWait<AndroidDriver> wait = new AppiumFluentWait<>(driver, Clock.systemUTC(), Sleeper.SYSTEM_SLEEPER);
-        wait.withTimeout(Duration.ofSeconds(5));
-        wait.until(d -> d.currentActivity().equals(".MainActivity"));
-        wait.ignoring(NoSuchElementException.class).until(d -> d.findElement(swagLabUserNameField).isDisplayed());
-        driver.findElement(swagLabUserNameField).sendKeys(user);
-        driver.findElement(swagLabPasswordField).sendKeys(password);
-        driver.findElement(swagLabLoginButton).click();
-        if (message.equals("success")) {
-            wait.ignoring(NoSuchElementException.class).until(d -> d.findElement(swagLabProductPageTitle).isDisplayed());
-
-            Assert.assertEquals(driver.findElement(swagLabProductPageTitle).getText(), "PRODUCTS");
-        } else
-            Assert.assertEquals(driver.findElement(swagLabLoginErrorMessage).getText(), message);
-    }
+//    @Test(dataProvider = "loginData")
+//    public void loginToSwagLab(String user, String password, String message) {
+//
+//        AppiumFluentWait<AndroidDriver> wait = new AppiumFluentWait<>(driver, Clock.systemUTC(), Sleeper.SYSTEM_SLEEPER);
+//        wait.withTimeout(Duration.ofSeconds(5));
+//        wait.until(d -> d.currentActivity().equals(".MainActivity"));
+//        wait.ignoring(NoSuchElementException.class).until(d -> d.findElement(swagLabUserNameField).isDisplayed());
+//        driver.findElement(swagLabUserNameField).sendKeys(user);
+//        driver.findElement(swagLabPasswordField).sendKeys(password);
+//        driver.findElement(swagLabLoginButton).click();
+//        if (message.equals("success")) {
+//            wait.ignoring(NoSuchElementException.class).until(d -> d.findElement(swagLabProductPageTitle).isDisplayed());
+//
+//            Assert.assertEquals(driver.findElement(swagLabProductPageTitle).getText(), "PRODUCTS");
+//        } else
+//            Assert.assertEquals(driver.findElement(swagLabLoginErrorMessage).getText(), message);
+//    }
 
     @Test()
+    public void loginAndScrollAndOpenAProductDetailsPage(){
+        new LoginScreen().login("standard_user","secret_sauce");
+        new ProductsScreen().scrollToProduct("Sauce Labs Bolt T-Shirt")
+                .tapOnProduct("Sauce Labs Bolt T-Shirt")
+                .assertItemPageContainsItemName("Sauce Labs Bolt T-Shirt");
+
+
+    }
 
     @AfterClass
     public void tearDown() {

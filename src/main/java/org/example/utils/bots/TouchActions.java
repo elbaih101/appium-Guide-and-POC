@@ -1,22 +1,22 @@
 package org.example.utils.bots;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
+import org.example.utils.LogUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class TouchActions {
-    AppiumDriver driver;
+    RemoteWebDriver driver;
 
-    public TouchActions(AppiumDriver driver) {
+    public TouchActions(RemoteWebDriver driver) {
         this.driver = driver;
     }
 
@@ -76,7 +76,7 @@ public class TouchActions {
         for (int i = 0; i < maxScrolls; i++) {
             // Check if element is visible
             if (!driver.findElements(locator).isEmpty()) {
-                System.out.println("Element found after " + (i+1) + " scroll(s).");
+                LogUtils.logDebug("Element found after " + (i+1) + " scroll(s).");
                 return;
             }
         Dimension size = driver.manage().window().getSize();
