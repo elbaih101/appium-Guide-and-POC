@@ -30,7 +30,6 @@ public class TestNgListener implements
     @Override
     public void onExecutionStart() {
         LogUtils.logInfo("===== Test Execution Started =====");
-
         if (emulatorRunning.compareAndSet(false, true)) {
             LogUtils.logInfo("Starting emulator...");
             AVDLauncher.launchEmulator();
@@ -99,10 +98,9 @@ public class TestNgListener implements
 
         try {
             byte[] screenshot = new ScreenShotsActions(DriverManager.getDriver()).takeScreenShotByte();
-            synchronized (Allure.class) { // Ensure thread-safe Allure attachment
-                AllureUtils.attachImage("Failure Screenshot - " + result.getMethod().getMethodName(),
-                        screenshot);
-            }
+            AllureUtils.attachImage("Failure Screenshot - " + result.getMethod().getMethodName(),
+                    screenshot);
+
         } catch (Exception e) {
             LogUtils.logError("Failed to capture screenshot: ", e.getMessage());
         }
@@ -111,6 +109,14 @@ public class TestNgListener implements
     @Override
     public void onTestSkipped(ITestResult result) {
         LogUtils.logInfo("Test Skipped: " + result.getMethod().getMethodName());
+        try {
+            byte[] screenshot = new ScreenShotsActions(DriverManager.getDriver()).takeScreenShotByte();
+            AllureUtils.attachImage("Failure Screenshot - " + result.getMethod().getMethodName(),
+                    screenshot);
+
+        } catch (Exception e) {
+            LogUtils.logError("Failed to capture screenshot: ", e.getMessage());
+        }
     }
 
     @Override

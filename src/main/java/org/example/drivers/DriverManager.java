@@ -34,19 +34,19 @@ public class DriverManager {
     public static void initDriver() throws MalformedURLException {
 
         if (driver == null) {
-            PropertiesManager probs =PropertiesManager.fromFile("src/main/resources/capability.properties");
-            File capbilities = new File(probs.getOrDefault("capabilities",""));
+            PropertiesManager probs = PropertiesManager.fromFile("src/main/resources/capability.properties");
+            File capbilities = new File(probs.getOrDefault("capabilities", ""));
             JsonObject caps = JsonUtils.readJson(capbilities.getPath()).getAsJsonObject();
             UiAutomator2Options options = new UiAutomator2Options()
 
 
-                    .setDeviceName(caps.has("appium:deviceName") ? caps.get("appium:deviceName").getAsString():null)
+                    .setDeviceName(caps.has("appium:deviceName") ? caps.get("appium:deviceName").getAsString() : null)
 
                     .setPlatformName(caps.get("platformName").getAsString())
 
-                    .setAutomationName(caps.has("appium:automationName") ? caps.get("appium:automationName").getAsString():null)
+                    .setAutomationName(caps.has("appium:automationName") ? caps.get("appium:automationName").getAsString() : null)
 
-                    .setUdid(caps.has("appium:uuid") ? caps.get("appium:uuid").getAsString():null)
+                    .setUdid(caps.has("appium:uuid") ? caps.get("appium:uuid").getAsString() : null)
 
                     .setApp(
                             Optional.ofNullable(caps.has("appium:app") && !caps.get("appium:app").isJsonNull()
@@ -58,7 +58,7 @@ public class DriverManager {
                     .setAppActivity(caps.has("appium:appActivity") ? caps.get("appium:appActivity").getAsString() : null)
                     .setAppWaitActivity(caps.has("appWaitActivity") ? caps.get("appWaitActivity").getAsString() : null)
                     .setAppWaitDuration(caps.has("appWaitDuration") ? Duration.ofMillis(caps.get("appWaitDuration").getAsLong()) : null)
-                    .setAdbExecTimeout(caps.has("adbExecTimeout") ?  Duration.ofMillis(caps.get("adbExecTimeout").getAsLong()) : null)
+                    .setAdbExecTimeout(caps.has("adbExecTimeout") ? Duration.ofMillis(caps.get("adbExecTimeout").getAsLong()) : null)
                     .setNoReset(caps.has("noReset") && caps.get("noReset").getAsBoolean());
 
 
@@ -74,10 +74,8 @@ public class DriverManager {
     public static void quitDriver() {
 
 
-        if (driver != null) {
-
+        if (driver != null) {;
             driver.quit();
-
             driver = null;
 
 

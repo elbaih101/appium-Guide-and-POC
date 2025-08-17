@@ -85,6 +85,14 @@ public class TestScricpts {
 
 
     }
+@Test()
+public void addItemToCartAndDeleteItUsingSwipe(){
+    new LoginScreen().login("standard_user","secret_sauce");
+    new ProductsScreen().scrollToProduct("Sauce Labs Bolt T-Shirt")
+            .addProductToCart("Sauce Labs Bolt T-Shirt")
+            .validateCartItemsCountIs("1")
+            .tapOnCartIcon().swipeAndDeleteItem("Sauce Labs Bolt T-Shirt");
+}
 
     @AfterClass
     public void tearDown() {

@@ -46,6 +46,14 @@ public class ElementActions {
         touchActions.scrollToElement(locator, maxScrolls);
     }
 
+    public void swipeLeft(By locator) {
+        touchActions.swipeElement(locator, "left");
+    }
+
+    public void swipeRight(By locator) {
+        touchActions.swipeElement(locator, "right");
+    }
+
     public String getVisibleText(By locator) {
         LogUtils.logDebug("Checking Text Is Visible With Locator", locator.toString());
         return findElement(locator).getText();

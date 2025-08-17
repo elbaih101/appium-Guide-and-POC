@@ -22,6 +22,11 @@ public class WaitingActions {
         wait = new FluentWait<>(driver, Clock.systemUTC(), Sleeper.SYSTEM_SLEEPER);
         wait.withTimeout(Duration.ofSeconds(10));
     }
+
+    public WaitingActions withTimeOut(long millis){
+        wait.withTimeout(Duration.ofMillis(millis));
+        return this;
+    }
     public  void waitForActivityToBe(String activity){
         wait.until(d -> ((AndroidDriver) d).currentActivity().equals(activity)
         );

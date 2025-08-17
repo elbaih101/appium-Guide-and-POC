@@ -15,9 +15,11 @@ import java.util.Collections;
 
 public class TouchActions {
     RemoteWebDriver driver;
+    WaitingActions waitingActions;
 
     public TouchActions(RemoteWebDriver driver) {
         this.driver = driver;
+        waitingActions =new WaitingActions(driver);
     }
 
     public void tap(By locator) {
@@ -56,12 +58,36 @@ public class TouchActions {
         driver.perform(Collections.singletonList(sequence));
     }
 
+    public void swipeElement(By locator, String direction) {
+        WebElement element = driver.findElement(locator);
+        Rectangle rec = element.getRect();
+        int startX =0;
+        int y= rec.getY();
+        int endX=0;
+        switch (direction.toLowerCase()) {
+            case "left" -> {
+                startX =rec.getX() + rec.getWidth();
+                endX = rec.getX() ;
+            }
+            case "reight" -> {
+                startX = rec.getX();
+                endX = rec.getX() + rec.getWidth();
+            }
+        }
+        swipe(startX,y,endX,y);
+
+    }
+
     public void swipe() {
         Dimension size = driver.manage().window().getSize();
         int startX = size.getWidth() / 2;
         int startY = size.getHeight() / 2;
         int endX = (int) (size.getWidth() * 0.25);
         int endY = startY;
+        swipe(startX, startY, endX, endY);
+    }
+
+    private void swipe(int startX, int startY, int endX, int endY) {
         PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
         Sequence sequence = new Sequence(finger1, 1)
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
@@ -72,27 +98,27 @@ public class TouchActions {
         driver.perform(Collections.singletonList(sequence));
     }
 
-    public void scrollToElement(By locator,int maxScrolls) {
+    public void scrollToElement(By locator, int maxScrolls) {
         for (int i = 0; i < maxScrolls; i++) {
             // Check if element is visible
             if (!driver.findElements(locator).isEmpty()) {
-                LogUtils.logDebug("Element found after " + (i+1) + " scroll(s).");
+                LogUtils.logDebug("Element found after " + (i + 1) + " scroll(s).");
                 return;
             }
-        Dimension size = driver.manage().window().getSize();
-        int startX = size.getWidth() / 2;
-        int startY = size.getHeight() / 2;
-        int endX = startX;
-        int endY = (int) (size.getHeight() * 0.25);
-        PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
-        Sequence sequence = new Sequence(finger1, 1)
-                .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
-                .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(new Pause(finger1, Duration.ofMillis(200)))
-                .addAction(finger1.createPointerMove(Duration.ofMillis(100), PointerInput.Origin.viewport(), endX, endY))
-                .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(Collections.singletonList(sequence));
-    }
+            Dimension size = driver.manage().window().getSize();
+            int startX = size.getWidth() / 2;
+            int startY = size.getHeight() / 2;
+            int endX = startX;
+            int endY = (int) (size.getHeight()*0.12);
+            PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
+            Sequence sequence = new Sequence(finger1, 1)
+                    .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
+                    .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                    .addAction(new Pause(finger1, Duration.ofMillis(200)))
+                    .addAction(finger1.createPointerMove(Duration.ofMillis(200), PointerInput.Origin.viewport(), endX, endY))
+                    .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+            driver.perform(Collections.singletonList(sequence));
+        }
     }
 
     public void dragAndDrop(By source, By target) {
