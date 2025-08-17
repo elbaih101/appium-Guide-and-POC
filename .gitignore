@@ -2,8 +2,8 @@
 /shelf/
 /workspace.xml
 /.idea/
-/target/
-/target/apps
-/target/inspector
-/target/org
+/target/*
+
 /allure-results/*
+/target/classes/
+/target/test-classes/
