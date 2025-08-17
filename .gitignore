@@ -3,4 +3,7 @@
 /workspace.xml
 /.idea/
 /target/
+/target/apps
+/target/inspector
+/target/org
 /allure-results/*
