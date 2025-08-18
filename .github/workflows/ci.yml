@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [ fiddling ]
+  pull_request:
+    branches: [ fiddling ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android Emulator
+        run: |
+          sudo apt-get update
+          sudo apt-get install -yq libvirt-daemon-system bridge-utils qemu-kvm
+          echo "y" | sdkmanager "platform-tools" "platforms;android-35" "system-images;android-35;google_apis;x86_64"
+          echo "no" | avdmanager create avd -n AVD1 -k "system-images;android-35;google_apis;x86_64" --force
+          $ANDROID_HOME/emulator/emulator -list-avds
+          nohup $ANDROID_HOME/emulator/emulator -avd AVD1 -no-window -no-audio -no-boot-anim &
+          adb wait-for-device
+          adb shell input keyevent 82
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Appium
+        run: npm install -g appium
+
+      - name: Start Appium Server
+        run: nohup appium > appium.log 2>&1 &
+
+      - name: Wait for Appium to be ready
+        run: |
+          for i in {1..30}; do
+            if nc -z localhost 4723; then
+              echo "Appium is up!"
+              break
+            fi
+            sleep 2
+          done
+
+      - name: Run Maven verify
+        run: mvn verify
