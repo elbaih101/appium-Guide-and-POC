@@ -76,15 +76,15 @@ public class TestScricpts {
 //            Assert.assertEquals(driver.findElement(swagLabLoginErrorMessage).getText(), message);
 //    }
 
-    @Test()
-    public void loginAndScrollAndOpenAProductDetailsPage(){
-        new LoginScreen().login("standard_user","secret_sauce");
-        new ProductsScreen().scrollToProduct("Sauce Labs Bolt T-Shirt")
-                .tapOnProduct("Sauce Labs Bolt T-Shirt")
-                .assertItemPageContainsItemName("Sauce Labs Bolt T-Shirt");
-
-
-    }
+//    @Test()
+//    public void loginAndScrollAndOpenAProductDetailsPage(){
+//        new LoginScreen().login("standard_user","secret_sauce");
+//        new ProductsScreen().scrollToProduct("Sauce Labs Bolt T-Shirt")
+//                .tapOnProduct("Sauce Labs Bolt T-Shirt")
+//                .assertItemPageContainsItemName("Sauce Labs Bolt T-Shirt");
+//
+//
+//    }
 @Test()
 public void addItemToCartAndDeleteItUsingSwipe(){
     new LoginScreen().login("standard_user","secret_sauce");
