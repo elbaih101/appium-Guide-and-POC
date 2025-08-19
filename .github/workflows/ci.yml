@@ -32,20 +32,17 @@ jobs:
 
       - name: Install Android Emulator and Create AVD
         run: |
-          set -e
-          sudo apt-get update
-          sudo apt-get install -yq libvirt-daemon-system bridge-utils qemu-kvm
-          export ANDROID_HOME=${ANDROID_HOME:-$HOME/Android/Sdk}
-          export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
-          yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-35" "system-images;android-35;google_apis;x86_64"
-          sdkmanager --list | grep system-images | grep android-35
-          avdmanager list device
-          echo "no" | avdmanager create avd -n AVD1 -k "system-images;android-35;google_apis;x86_64" --device "pixel_5"
-          $ANDROID_HOME/emulator/emulator -list-avds
-          nohup $ANDROID_HOME/emulator/emulator -avd AVD1 -no-window -no-audio -no-boot-anim &
-          adb wait-for-device
-          adb shell input keyevent 82
+            set -e
+            sudo apt-get update
+            sudo apt-get install -yq libvirt-daemon-system bridge-utils qemu-kvm
+            echo "y" | sdkmanager --install "system-images;android-35;google_apis_playstore;x86_64" "sources;android-35" "platforms;android-35" "build-tools;35.0.1"
+            yes | sdkmanager --licenses
+            avdmanager list device
+            echo "no" | avdmanager create avd -n AVD1 -k "system-images;android-35;google_apis;x86_64"
+            $ANDROID_HOME/emulator/emulator -list-avds
+            nohup $ANDROID_HOME/emulator/emulator -avd AVD1 -no-window -no-audio -no-boot-anim &
+            adb wait-for-device
+            adb shell input keyevent 82
 
       - name: Install Node.js
         uses: actions/setup-node@v4
