@@ -126,11 +126,12 @@
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
-                        <version>1.9.20.1</version>
+                        <version>${aspectj.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>io.qameta.allure</groupId>
                         <artifactId>allure-junit4-aspect</artifactId>
+                        <version>${allure.v}</version>
                         <scope>test</scope>
                     </dependency>
                 </dependencies>
