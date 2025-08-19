@@ -37,7 +37,7 @@ jobs:
       - name: Run Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-            api-level: 35-ext15
+            api-level: 35
             emulator-options: -noaudio -no-boot-anim -no-window
             arch: x86_64
             avd-name: AVD1
