@@ -38,7 +38,7 @@ jobs:
             echo "y" | sdkmanager --install "system-images;android-35;google_apis_playstore;x86_64" "sources;android-35" "platforms;android-35" "build-tools;35.0.1"
             yes | sdkmanager --licenses
             avdmanager list device
-            echo "no" | avdmanager create avd -n AVD1 -k "system-images;android-35;google_apis;x86_64"
+            echo "no" | avdmanager create avd -n AVD1 -k "system-images;android-35;google_apis_playstore;x86_64"
             $ANDROID_HOME/emulator/emulator -list-avds
             nohup $ANDROID_HOME/emulator/emulator -avd AVD1 -no-window -no-audio -no-boot-anim &
             adb wait-for-device
