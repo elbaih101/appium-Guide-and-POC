@@ -56,7 +56,7 @@ private AllureUtils(){
 
     public static void attachImage(String name,byte[] image) {
         LogUtils.logInfo("Attaching image to allure report");
-        Allure.addAttachment(name+".png",new ByteArrayInputStream(image));
+        Allure.addAttachment(name+".png","image/png",new ByteArrayInputStream(image),".png");
 
     }
 

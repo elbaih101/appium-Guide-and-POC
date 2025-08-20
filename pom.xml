@@ -132,7 +132,7 @@
                         <groupId>io.qameta.allure</groupId>
                         <artifactId>allure-junit4-aspect</artifactId>
                         <version>${allure.v}</version>
-                        <scope>test</scope>
+                        <scope>runtime</scope>
                     </dependency>
                 </dependencies>
             </plugin>
