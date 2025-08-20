@@ -48,6 +48,8 @@ public class AVDLauncher {
         }
 
         try {
+            if (!caps.get("appium:uuid").getAsString().contains("emulator"))
+                return;
             String[] command = buildCommand(headless);
             LogUtils.logInfo("Launching emulator with command: " + String.join(" ", command));
             avdProcess = CommandExecuter.executeCommand(command);

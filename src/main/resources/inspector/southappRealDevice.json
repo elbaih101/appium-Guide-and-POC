@@ -1,0 +1,14 @@
+{
+  "platformName": "Android",
+  "appium:platformVersion": "15",
+  "appium:automationName": "uiautomator2",
+  "appium:uuid":  "TG5XAQPVSCTS7T7L",
+  "appium:deviceName": "TG5XAQPVSCTS7T7L",
+  "appium:app": "src/main/resources/apps/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk",
+  "appium:appPackage": "com.swaglabsmobileapp",
+  "appium:appActivity": "com.swaglabsmobileapp.MainActivity",
+  "appWaitActivity": "*",
+  "appWaitDuration": 60000,
+  "adbExecTimeout": 60000,
+  "noReset": true
+}
