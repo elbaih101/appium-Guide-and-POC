@@ -42,14 +42,19 @@ public class AVDLauncher {
     }
 
     public static void launchEmulator(boolean headless) {
-        if (avdProcess != null && avdProcess.isAlive()) {
-            LogUtils.logInfo("Emulator is already running");
+        if (isCI()) {
+            LogUtils.logInfo("CI environment detected, skipping emulator launch.");
             return;
         }
-
+        if (avdProcess != null && avdProcess.isAlive()) {
+            LogUtils.logInfo("Emulator is already running, skipping emulator launch.");
+            return;
+        }
+        if (!caps.get("appium:uuid").getAsString().contains("emulator")){
+            LogUtils.logInfo("Running On Real Device, skipping emulator launch.");
+            return;}
         try {
-            if (!caps.get("appium:uuid").getAsString().contains("emulator"))
-                return;
+
             String[] command = buildCommand(headless);
             LogUtils.logInfo("Launching emulator with command: " + String.join(" ", command));
             avdProcess = CommandExecuter.executeCommand(command);
@@ -276,5 +281,8 @@ public class AVDLauncher {
 
         LogUtils.logError("Device did not complete boot within timeout");
         // Don't throw exception - let Appium handle it
+    }
+    private static boolean isCI() {
+        return "true".equalsIgnoreCase(System.getenv("CI"));
     }
 }
