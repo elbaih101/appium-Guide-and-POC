@@ -7,3 +7,5 @@
 /allure-results/*
 /target/classes/
 /target/test-classes/
+/reports/
+/allure-results/

@@ -12,7 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <appium.v>9.5.0</appium.v>
+        <appium.v>10.0.0</appium.v>
         <allure.v>2.29.1</allure.v>
         <cucumber.v>7.21.1</cucumber.v>
         <log4j.v>2.24.3</log4j.v>
