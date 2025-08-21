@@ -42,6 +42,9 @@ jobs:
       - name: Install Appium
         run: npm install -g appium
 
+      - name: Install UIAutomator2 Driver
+        run: appium driver install uiautomator2
+
       - name: Start Appium Server
         run: nohup appium > appium.log 2>&1 &
 
@@ -57,14 +60,14 @@ jobs:
       - name: Run Emulator and tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-            api-level: 35
-            emulator-options: -noaudio -no-boot-anim -no-window
-            arch: x86_64
-            avd-name: AVD1
-            script: |
-              echo "Emulator booted!"
-              adb devices
-              mvn verify
+          api-level: 35
+          emulator-options: -noaudio -no-boot-anim -no-window
+          arch: x86_64
+          avd-name: AVD1
+          script: |
+            echo "Emulator booted!"
+            adb devices
+            mvn verify
   #
 #      - name: Install Android SDK
 #        uses: android-actions/setup-android@v3
