@@ -48,7 +48,7 @@ pipeline {
                 emulator -list-avds
                              
                 Start-Process emulator -ArgumentList @(
-                    "-avd", ${avdName},
+                    "-avd", "${avdName}",
                     "-wipe-data",
                     "-no-window",
                     "-gpu", "swiftshader_indirect",
