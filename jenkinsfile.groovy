@@ -39,7 +39,7 @@ pipeline {
 
         stage('Start Emulator and Logcat') {
             steps {
-                bat """
+                powershell """
                 Stop-Process -Name "qemu-system-x86_64" -Force -ErrorAction SilentlyContinue
                 Stop-Process -Name "adb" -Force -ErrorAction SilentlyContinue
                 Stop-Process -Name "node" -Force -ErrorAction SilentlyContinue
@@ -63,18 +63,15 @@ pipeline {
                 ) -NoNewWindow
                  
                 Start-Sleep -Seconds 20
-                                 
-                # Wait for adb to connect
+                                
                 adb wait-for-device
-                 
-                # Wait for boot to complete
+                
                 while ((adb shell getprop sys.boot_completed).Trim() -ne "1") {
                     Start-Sleep -Seconds 2
                 }
                  
                 Write-Output "Emulator booted."
                  
-                # Extra wait for system services
                 Start-Sleep -Seconds 20
 
             """
