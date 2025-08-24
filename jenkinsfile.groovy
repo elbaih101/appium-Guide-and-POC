@@ -60,7 +60,7 @@ pipeline {
                     "-no-snapshot-save",
                     "-prop", "persist.sys.language=en",
                     "-prop", "persist.sys.country=US"
-                ) -NoNewWindow
+                ) -WindowStyle Hidden
                  
                 Start-Sleep -Seconds 20
                                 
