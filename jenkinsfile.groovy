@@ -40,21 +40,15 @@ pipeline {
         stage('Start Emulator and Logcat') {
             steps {
                 bat """
-                # Kill leftover processes
                 Stop-Process -Name "qemu-system-x86_64" -Force -ErrorAction SilentlyContinue
                 Stop-Process -Name "adb" -Force -ErrorAction SilentlyContinue
                 Stop-Process -Name "node" -Force -ErrorAction SilentlyContinue
                 Stop-Process -Name "emulator" -Force -ErrorAction SilentlyContinue
                  
-                # List available AVDs
                 emulator -list-avds
-                 
-                # Replace this with your AVD name
-                $avdName = ${avdName}
-                 
-                # Start emulator (background process)
+                             
                 Start-Process emulator -ArgumentList @(
-                    "-avd", $avdName,
+                    "-avd", ${avdName},
                     "-wipe-data",
                     "-no-window",
                     "-gpu", "swiftshader_indirect",
@@ -68,15 +62,8 @@ pipeline {
                     "-prop", "persist.sys.country=US"
                 ) -NoNewWindow
                  
-                # Give emulator some time to spin up
                 Start-Sleep -Seconds 20
-                 
-                # Save emulator PID to file
-                $pid = (Get-Process -Name "emulator" -ErrorAction SilentlyContinue).Id
-                if ($pid) {
-                    Set-Content -Path "emulator_pid.txt" -Value $pid
-                }
-                 
+                                 
                 # Wait for adb to connect
                 adb wait-for-device
                  
