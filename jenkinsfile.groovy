@@ -71,9 +71,7 @@ pipeline {
                 }
                  
                 Write-Output "Emulator booted."
-                 
-                Start-Sleep -Seconds 20
-
+                
             """
             }
         }
@@ -87,7 +85,7 @@ pipeline {
                         catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
 
                             echo 'Starting maven build'
-                            dir('Appium') {
+                            dir('appium-Guide-and-POC') {
 
                                 script {
                                     //  def androidVersion = params.androidVersion.split(':')[0]
