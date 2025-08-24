@@ -21,6 +21,7 @@ public class CartScreen extends BaseScreen {
     public CartScreen() {
         super();
     }
+
     @Step("Swipe item '{itemName}' and delete it ")
     public CartScreen swipeAndDeleteItem(String itemName) {
         driver.elementActions().swipeLeft(itemBy(itemName));

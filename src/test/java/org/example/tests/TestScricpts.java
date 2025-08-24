@@ -91,7 +91,8 @@ public void addItemToCartAndDeleteItUsingSwipe(){
     new ProductsScreen().scrollToProduct("Sauce Labs Bolt T-Shirt")
             .addProductToCart("Sauce Labs Bolt T-Shirt")
             .validateCartItemsCountIs("1")
-            .tapOnCartIcon().swipeAndDeleteItem("Sauce Labs Bolt T-Shirt");
+            .tapOnCartIcon()
+            .swipeAndDeleteItem("Sauce Labs Bolt T-Shirt");
 }
 
     @AfterClass
