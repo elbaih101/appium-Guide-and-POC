@@ -1,0 +1,65 @@
+package org.example.drivers;
+
+import com.google.gson.JsonObject;
+import io.appium.java_client.android.options.UiAutomator2Options;
+import org.example.utils.JsonUtils;
+import org.example.utils.PropertiesManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+import java.util.Optional;
+
+public class AndroidDriver implements WebDriverInterface{
+    @Override
+    public RemoteWebDriver createDriver(WebDriverBuilder builder) {
+            PropertiesManager probs = PropertiesManager.fromFile("src/main/resources/capability.properties");
+            File capbilities = new File(probs.getOrDefault("capabilities", ""));
+            JsonObject caps = JsonUtils.readJson(capbilities.getPath()).getAsJsonObject();
+            UiAutomator2Options options = new UiAutomator2Options()
+
+
+                    .setDeviceName(caps.has("appium:deviceName") ? caps.get("appium:deviceName").getAsString() : null)
+
+                    .setPlatformName(caps.get("platformName").getAsString())
+
+                    .setAutomationName(caps.has("appium:automationName") ? caps.get("appium:automationName").getAsString() : null)
+
+                    .setUdid(caps.has("appium:uuid") ? caps.get("appium:uuid").getAsString() : null)
+
+                    .setApp(
+                            Optional.ofNullable(caps.has("appium:app") && !caps.get("appium:app").isJsonNull()
+                                            ? caps.get("appium:app").getAsString()
+                                            : null)
+                                    .map(path -> new File(path).getAbsolutePath())
+                                    .orElse(null))
+                    .setAppPackage(caps.has("appium:appPackage") ? caps.get("appium:appPackage").getAsString() : null)
+                    .setAppActivity(caps.has("appium:appActivity") ? caps.get("appium:appActivity").getAsString() : null)
+                    .setAppWaitActivity(caps.has("appWaitActivity") ? caps.get("appWaitActivity").getAsString() : null)
+                    .setAppWaitDuration(caps.has("appWaitDuration") ? Duration.ofMillis(caps.get("appWaitDuration").getAsLong()) : null)
+                    .setAdbExecTimeout(caps.has("adbExecTimeout") ? Duration.ofMillis(caps.get("adbExecTimeout").getAsLong()) : null)
+                    .setNoReset(caps.has("noReset") && caps.get("noReset").getAsBoolean())
+                    //using remote adb host for when running through a docker container
+                    .setRemoteAdbHost("host.docker.internal");
+
+
+        URL url = null;
+        try {
+            url = new URL("http://0.0.0.0:4444");
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return  new io.appium.java_client.android.AndroidDriver(url, options);
+
+
+    }
+
+    @Override
+    public WebDriverBuilder defaultBuilder() {
+        return null;
+    }
+}

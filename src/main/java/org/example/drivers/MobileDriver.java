@@ -5,14 +5,15 @@ import org.example.utils.bots.ElementActions;
 import org.example.utils.bots.ScrollingActions;
 import org.example.utils.bots.ValidationActions;
 import org.example.utils.bots.WaitingActions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class MobileDriver {
+public class MobileDriver{
 
     AppiumDriver driver ;
 
 
-    public MobileDriver(AppiumDriver driver) {
-        this.driver = driver;
+    public MobileDriver(RemoteWebDriver driver) {
+        this.driver =(AppiumDriver) driver;
     }
 
     public ElementActions elementActions() {

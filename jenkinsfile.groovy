@@ -65,7 +65,7 @@ pipeline {
                 Start-Sleep -Seconds 20
                                 
                 adb wait-for-device
-                
+                Write
                 while ((adb shell getprop sys.boot_completed).Trim() -ne "1") {
                     Start-Sleep -Seconds 2
                 }

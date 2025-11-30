@@ -6,7 +6,10 @@ import io.appium.java_client.android.AndroidDriver;
 
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.example.utils.JsonUtils;
+import org.example.utils.LogUtils;
 import org.example.utils.PropertiesManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 
 import java.io.File;
@@ -17,70 +20,43 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Optional;
 
+import static org.testng.Assert.fail;
+
 
 public class DriverManager {
 
+    private static final ThreadLocal<RemoteWebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
 
-    public static AndroidDriver driver;
-
-
-    public static AndroidDriver getDriver() {
-
-        return driver;
-
+    private DriverManager() {
+        super();
     }
 
 
-    public static void initDriver() throws MalformedURLException {
+    public static void initDriver(String browserName) {
 
-        if (driver == null) {
-            PropertiesManager probs = PropertiesManager.fromFile("src/main/resources/capability.properties");
-            File capbilities = new File(probs.getOrDefault("capabilities", ""));
-            JsonObject caps = JsonUtils.readJson(capbilities.getPath()).getAsJsonObject();
-            UiAutomator2Options options = new UiAutomator2Options()
-
-
-                    .setDeviceName(caps.has("appium:deviceName") ? caps.get("appium:deviceName").getAsString() : null)
-
-                    .setPlatformName(caps.get("platformName").getAsString())
-
-                    .setAutomationName(caps.has("appium:automationName") ? caps.get("appium:automationName").getAsString() : null)
-
-                    .setUdid(caps.has("appium:uuid") ? caps.get("appium:uuid").getAsString() : null)
-
-                    .setApp(
-                            Optional.ofNullable(caps.has("appium:app") && !caps.get("appium:app").isJsonNull()
-                                            ? caps.get("appium:app").getAsString()
-                                            : null)
-                                    .map(path -> new File(path).getAbsolutePath())
-                                    .orElse(null))
-                    .setAppPackage(caps.has("appium:appPackage") ? caps.get("appium:appPackage").getAsString() : null)
-                    .setAppActivity(caps.has("appium:appActivity") ? caps.get("appium:appActivity").getAsString() : null)
-                    .setAppWaitActivity(caps.has("appWaitActivity") ? caps.get("appWaitActivity").getAsString() : null)
-                    .setAppWaitDuration(caps.has("appWaitDuration") ? Duration.ofMillis(caps.get("appWaitDuration").getAsLong()) : null)
-                    .setAdbExecTimeout(caps.has("adbExecTimeout") ? Duration.ofMillis(caps.get("adbExecTimeout").getAsLong()) : null)
-                    .setNoReset(caps.has("noReset") && caps.get("noReset").getAsBoolean());
+        RemoteWebDriver driver = DriverFactory.getDriver(browserName).
+                createDriver(DriverFactory.getDriver(browserName).defaultBuilder());
+        setDriver(driver);
+    }
+    public static void setDriver(RemoteWebDriver driver) {
+        LogUtils.logDebug("Seting Thread Driver as :",driver.toString());
+        DRIVER_THREAD_LOCAL.set(driver);
+    }
 
 
-            URL url = new URL("http://0.0.0.0:4723");
-
-            driver = new AndroidDriver(url, options);
-
+    public static RemoteWebDriver getDriver() {
+        if (DRIVER_THREAD_LOCAL.get() == null) {
+            fail("Driver is Null");
         }
-
+        return DRIVER_THREAD_LOCAL.get();
+    }
+    public static void unloadDriver(){
+        DRIVER_THREAD_LOCAL.remove();
     }
 
 
     public static void quitDriver() {
-
-
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-
-
-        }
-
+        getDriver().quit();
 
     }
 

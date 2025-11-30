@@ -41,8 +41,8 @@ public class TestScricpts {
 
     @BeforeClass
     public void setup() throws MalformedURLException {
-        DriverManager.initDriver();
-        driver = DriverManager.getDriver();
+        DriverManager.initDriver("android");
+        driver = (AndroidDriver) DriverManager.getDriver();
     }
 
     //

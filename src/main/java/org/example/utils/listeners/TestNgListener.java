@@ -40,9 +40,9 @@ public class TestNgListener implements
 
         if (appiumRunning.compareAndSet(false, true)) {
             LogUtils.logInfo("Starting Appium server...");
-            AppiumServer.startServer();
-//            AppiumLauncher.startAppium();
-//            AppiumLauncher.waitForAppium();
+//            AppiumServer.startServer();
+//     //       AppiumLauncher.startAppium();
+//     //       AppiumLauncher.waitForAppium();
         } else {
             LogUtils.logDebug("Appium already running, skipping start.");
         }
@@ -54,8 +54,8 @@ public class TestNgListener implements
 
         if (appiumRunning.compareAndSet(true, false)) {
             LogUtils.logInfo("Stopping Appium server...");
-            AppiumServer.stopServer();
-//            AppiumLauncher.stopAppium();
+//            AppiumServer.stopServer();
+// //           AppiumLauncher.stopAppium();
         } else {
             LogUtils.logDebug("Appium was not running, skipping stop.");
         }

@@ -18,6 +18,7 @@
         <log4j.v>2.24.3</log4j.v>
         <aspectj.version>1.9.20.1</aspectj.version>
         <jackson.v>2.19.2</jackson.v>
+        <selenium.v>4.38.0</selenium.v>
     </properties>
 
     <dependencyManagement>
@@ -46,7 +47,11 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.v}</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
             <groupId>io.appium</groupId>
