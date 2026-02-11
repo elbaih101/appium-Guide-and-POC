@@ -2,10 +2,7 @@ package org.example.utils.bots;
 
 
 import org.example.utils.LogUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -15,11 +12,15 @@ public class ElementActions {
     WebDriver driver;
     TouchActions touchActions;
     Actions actions;
+    JavascriptExecutor js;
+
 
     public ElementActions(RemoteWebDriver driver) {
         this.driver = driver;
         touchActions = new TouchActions(driver);
         actions = new Actions(driver);
+        js = (JavascriptExecutor) driver;
+
     }
 
     public WebElement findElement(By locator) {
@@ -99,4 +100,31 @@ public class ElementActions {
         }
         throw new NoSuchElementException("No element with text '" + text + "' found in: " + elementsLocator);
     }
+
+    public boolean isInViewport(WebElement element) {
+        String script =
+                "var elem = arguments[0];" +
+                        "var rect = elem.getBoundingClientRect();" +
+                        "return (" +
+                        "    rect.top >= 0 &&" +
+                        "    rect.left >= 0 &&" +
+                        "    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&" +
+                        "    rect.right <= (window.innerWidth || document.documentElement.clientWidth)" +
+                        ");";
+        return (Boolean) js.executeScript(script, element);
+    }
+
+    public boolean isInViewport(By locator) {
+        String script =
+                "var elem = arguments[0];" +
+                        "var rect = elem.getBoundingClientRect();" +
+                        "return (" +
+                        "    rect.top >= 0 &&" +
+                        "    rect.left >= 0 &&" +
+                        "    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&" +
+                        "    rect.right <= (window.innerWidth || document.documentElement.clientWidth)" +
+                        ");";
+        return (Boolean) js.executeScript(script, findElement(locator));
+    }
+
 }

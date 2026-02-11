@@ -10,16 +10,20 @@ public class ScrollActions {
 
     private final JavascriptExecutor js;
     private final ElementActions elementActions;
+    private final WaitingActions waitingActions;
 
     public ScrollActions(RemoteWebDriver driver) {
         this.js =driver;
         elementActions = new ElementActions(driver);
+        waitingActions=new WaitingActions(driver);
+
     }
 
     // Scroll to a specific element
     public void scrollToElement(By locator) {
         WebElement element = elementActions.findElement(locator);
         js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        waitingActions.waitForElementInViewport(locator);
     }
 
     // Scroll vertically by pixel amount

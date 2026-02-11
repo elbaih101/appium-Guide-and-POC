@@ -1,6 +1,7 @@
 package org.example.utils.bots;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 
 public class BrowserActions {
     WebDriver driver;
@@ -11,6 +12,20 @@ public class BrowserActions {
 
     public void navigateTo(String url) {
         driver.navigate().to(url);
+    }
+
+    public void openInANewTab(String url) {
+        driver.switchTo().newWindow(WindowType.TAB);
+        driver.navigate().to(url);
+    }
+
+    public void switchToTabByTitle(String windowTitle) {
+        for (String handle : driver.getWindowHandles()) {
+            driver.switchTo().window(handle);
+            if (driver.getTitle().equals(windowTitle)) {
+                break;
+            }
+        }
     }
 
     public void refresh() {
@@ -29,7 +44,7 @@ public class BrowserActions {
         return driver.getCurrentUrl();
     }
 
-    public String getWindowTitle(){
+    public String getWindowTitle() {
         return driver.getTitle();
     }
 }

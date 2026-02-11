@@ -66,4 +66,24 @@ public class JsonUtils {
         return null;
     }
 
+    public static <T> T readJsonFile(String filePath, Class<T> clazz) throws IOException {
+        File file = new File(filePath);
+        return objectMapper.readValue(file, clazz);
+    }
+
+    public static <T> T fromJsonString(String jsonString, Class<T> clazz) throws IOException {
+        return objectMapper.readValue(jsonString, clazz);
+    }
+
+    public static String toJsonString(Object object) throws IOException {
+        return objectMapper.writeValueAsString(object);
+    }
+
+    public static void writeJsonFile(Object object, String filePath) throws IOException {
+        objectMapper.writeValue(new File(filePath), object);
+    }
+
+    public static ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
 }

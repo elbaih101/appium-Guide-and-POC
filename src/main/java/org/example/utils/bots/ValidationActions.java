@@ -6,9 +6,6 @@ import org.testng.Assert;
 
 public class ValidationActions {
     WebDriver driver;
-    public ValidationActions(RemoteWebDriver driver) {
-        this.driver=driver;
-    }
 
     public ValidationActions(WebDriver driver) {
         this.driver = driver;
@@ -19,6 +16,22 @@ public class ValidationActions {
     }
 
     public void assertContains(String actual, String expected) {
-        Assert.assertTrue(actual.contains(expected),  "Actual: '" + actual + "' does not contain Expected: '" + expected + "'");
+        Assert.assertTrue(actual.contains(expected), "The actual text: " + "'" + actual + "'" + " does not contain expected text: " + "'" + expected + "'\n");
     }
+
+    public void assertTrue(boolean bol) {
+        Assert.assertTrue(bol);
+    }
+    public void assertTrue(boolean bol, String message) {
+        Assert.assertTrue(bol, message);
+    }
+
+    public void assertFalse(boolean bol) {
+        Assert.assertFalse(bol);
+    }
+
+    public void assertFalse(boolean bol, String message) {
+        Assert.assertFalse(bol, message);
+    }
+
 }
