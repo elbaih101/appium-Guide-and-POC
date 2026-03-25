@@ -274,7 +274,16 @@ Container (android-dev):
 │   └── platforms/
 └── ~/.npm-global/ (Appium installation)
 ```
+ssue 2: AVD Not Found by Emulator
 
+Error: Unknown AVD name [AVD1] - AVD existed in ~/.config/.android/avd/ but emulator looked in ~/.android/avd/
+Solution: Created symbolic links to make AVD accessible:
+```bash
+
+mkdir -p ~/.android/avd
+ln -sf ~/.config/.android/avd/AVD1.avd ~/.android/avd/AVD1.avd
+ln -sf ~/.config/.android/avd/AVD1.ini ~/.android/avd/AVD1.ini
+```
 This setup gives you a complete Android development environment with Appium testing capabilities while keeping your Bazzite system clean and organized!
 
 
